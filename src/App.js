@@ -1,24 +1,22 @@
-import logo from './logo.svg';
-import './App.css';
+
+import { Route, Routes } from "react-router-dom";
+
+// App Components
+import Landing from "./components/Landing";
+import ListContainer from "./components/ListContainer";
+
+// Styled Components
+import { AppContainer } from "./components/styles/Containers.styled";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <AppContainer>
+      <Routes>
+        <Route path="/" element={<Landing />} />
+        <Route path="todo" element={<ListContainer initialName={'Todo List'} isTodo={true}/>} />
+        <Route path="shopping" element={<ListContainer initialName={'Shopping List'} isShopping={true}/>} />
+      </Routes>
+    </AppContainer>
   );
 }
 
