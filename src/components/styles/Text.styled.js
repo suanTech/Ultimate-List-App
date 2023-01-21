@@ -16,13 +16,16 @@ const Label = styled.h2`
 `
 const ErrorMessage = styled.p`
   font-size: .8em;
-  color: #8e8080;
+  color: #9F9F9F;
 `
 const PlainText = styled.p`
   font-size: .8em;
+  padding: 0 15px;
+  margin: 0;
 `
 const ItemText = styled.span`
   padding-left: 10px; 
   width: 70%;
+  font-size: .9em;
 `
 export {MainTitle, Label, ErrorMessage, ListName, PlainText, ItemText }

@@ -1,45 +1,56 @@
 import styled from "styled-components";
 import { ItemText } from "./Text.styled";
-import { scaleUp } from "./Buttons.styled";
+import checkIcon from "../../assets/checkIcon.png";
+
+const AddItemForm = styled.form`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`
 
 const AddItemInput = styled.input`
-  border: none;
+  border: 1px solid black;
   height: 2em;
+  width: 50%;
   padding-left: 5px;
   margin-right: 10px;
   &:focus {
-    background-color: #F7F6F4;
-    border-radius: 5px;
+    background-color: ${props => props.theme.colors.lighterGrey};
+    border-bottom: 2px solid black;
+  }
+  &:focus::placeholder {
+    opacity: 0;
+  }
+  ::placeholder {
+    color: ${props => props.theme.colors.grey};
+    font-style: italic;
+    transition: opacity .2s ease-out;
   }
 `
 const EditItemInput = styled.input`
   border: none;
   border-bottom: 1px solid black;
-  width: 140px;
-  margin-right: 10px;
-`
-
-const ItemList = styled.ul`
-  margin: 0;
-  padding: 10px;
+  padding-bottom: 5px;
+  width: 70%;
+  background: transparent;
 `
 
 const ListItem = styled.li`
-  line-height: 2.3em;
-  border-bottom: 1.2px solid #F2F1EB;
-  padding-bottom: 2px;
+  border-bottom: 1.2px solid ${props => props.theme.colors.lightGrey};
   min-width: 200px;
+  padding: 10px;
 `
 
 const CustomCheckbox = styled.div`
-  width: 12px;
-  height: 12px;
-  border: 2px solid #fcc637;
+  min-width: 14px;
+  height: 14px;
+  border: 2px solid ${props => props.theme.colors.yellow};
   border-radius: 50%;
   cursor: pointer;
+  transition: all .3s;
   &:hover {
-    animation: ${scaleUp} .5s;
-    box-shadow: 0 1px 5px 2px rgba();
+    transform: scale(1.1);
+    box-shadow: 0 1px 5px 2px ${props => props.theme.colors.lighterGrey};
   }
 `
 
@@ -47,17 +58,19 @@ const CheckboxInput = styled.input`
   display: none;
   &:checked ~ ${ItemText} {
     text-decoration: line-through;
-    color: #ccc;
+    font-style: italic;
+    color: ${props => props.theme.colors.grey};
   };
   &:checked + ${CustomCheckbox} {
-    background-image: 
+    background-color: ${props => props.theme.colors.lightYellow};
+    background-image: url(${checkIcon});
+    background-size: cover;
   }
 `
 const CheckboxLabel = styled.label`
   display: flex;
   justify-content: space-between;
   align-items: center;
-
 `
 
-export { AddItemInput, ItemList, EditItemInput, ListItem, CheckboxInput, CustomCheckbox, CheckboxLabel}
+export { AddItemForm, AddItemInput, EditItemInput, ListItem, CheckboxInput, CustomCheckbox, CheckboxLabel}

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Header from "./Header";
 import TodoApp from "./TodoList/TodoApp";
 import Shopping from "./ShoppingList/Shopping";
@@ -10,6 +10,9 @@ export default function ListContainer({initialName, isTodo, isShopping}) {
   function handleListNameChange(e) {
     setListName(e.target.value);
   }
+  useEffect(() => {
+    localStorage.setItem("list-name",JSON.stringify(listName))
+  }, [listName]);
   function displayList() {
     if(isTodo) {
       return <TodoApp />
@@ -18,15 +21,31 @@ export default function ListContainer({initialName, isTodo, isShopping}) {
       return <Shopping />
     }
   }
+  function handleClickDeleteBtn() {
+    if(window.confirm('Clear all? ')) {
+      localStorage.clear()
+      window.location.reload(false)
+    }
+  }
+  function handleClickSaveBtn() {
+    alert('Saved!')
+  }
+  const now = new Date();
+  const today = now.toDateString().split(' ').slice(0,3).join(' ')
   return (
     <ListsContainer>
       <Header 
         listName={listName} 
         onChange={handleListNameChange}
       />
+      <p>{today}</p>
       {displayList()}
-      <PrimaryButton style={{marginRight: '15px'}}>Save as template</PrimaryButton>
-      <PrimaryButton>Delete list</PrimaryButton>
+      <PrimaryButton 
+        onClick={handleClickSaveBtn}
+        style={{marginRight: '15px'}}>Save List</PrimaryButton>
+      <PrimaryButton
+        onClick={handleClickDeleteBtn}
+      >Delete list</PrimaryButton>
     </ListsContainer>
   );
 }

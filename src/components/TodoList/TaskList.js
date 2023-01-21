@@ -1,32 +1,83 @@
-import React, { useState } from "react";
-import { SecondaryButton } from "../styles/Buttons.styled";
-import { ItemContainer } from "../styles/Containers.styled";
-import { EditItemInput, ItemList, ListItem, CheckboxInput, CustomCheckbox, CheckboxLabel } from "../styles/Inputs.styled";
+import { useState, useContext } from "react";
+import { TasksContext, TasksDispatchContext } from "../TasksContext";
+
+import { EditButton } from "../styles/Buttons.styled";
+import { ItemContainer, ItemListContainer } from "../styles/Containers.styled";
+import {
+  EditItemInput,
+  ListItem,
+  CheckboxInput,
+  CustomCheckbox,
+  CheckboxLabel,
+} from "../styles/Inputs.styled";
 import { ItemText } from "../styles/Text.styled";
 
-function Task({ task, onEdit, onDelete }) {
+export default function TaskList() {
+  const tasks = useContext(TasksContext);
+  if(tasks) {
+    return (
+      <ItemContainer>
+        <ItemListContainer style={{ listStyle: "none" }}>
+          {/*list type none*/}
+          {tasks
+            .filter((task) => !task.isChecked)
+            .map((task, index) => (
+              <ListItem key={task.id} index={index}>
+                <Task task={task} />
+              </ListItem>
+            ))}
+          {tasks
+            .filter((task) => task.isChecked)
+            .map((task, index) => (
+              <ListItem
+                key={task.id}
+                index={index}
+                style={{ background: "#F7F6F4" }}
+              >
+                <Task task={task} disabled={true} />
+              </ListItem>
+            ))}
+        </ItemListContainer>
+      </ItemContainer>
+    );
+  }
+}
+
+function Task({ task, disabled }) {
   let listItem;
   const [isEditing, setIsEditing] = useState(false);
+  const dispatch = useContext(TasksDispatchContext);
+  const handleEdit = (e) => {
+    e.preventDefault();
+    setIsEditing(false);
+  };
   if (isEditing) {
     listItem = (
       <>
         <EditItemInput
-          value={task.task}
-          onChange={(e) =>
-            onEdit({
-              ...task,
-              task: e.target.value,
-            })
-          }
+          value={task.text}
+          onChange={(e) => {
+            dispatch({
+              type: "edited",
+              task: {
+                ...task,
+                task: e.target.value,
+              },
+            });
+          }}
         />
-        <SecondaryButton onClick={() => setIsEditing(false)}>Save</SecondaryButton>
+        <EditButton type="submit" onClick={handleEdit} disabled={disabled}>
+          &#128077;
+        </EditButton>
       </>
     );
   } else {
     listItem = (
       <>
-        <ItemText>{task.task}</ItemText>
-        <SecondaryButton onClick={() => setIsEditing(true)}>{'\u00B7'}</SecondaryButton>
+        <ItemText>{task.text}</ItemText>
+        <EditButton onClick={() => setIsEditing(true)} disabled={disabled}>
+          &#9997;
+        </EditButton>
       </>
     );
   }
@@ -37,32 +88,29 @@ function Task({ task, onEdit, onDelete }) {
         type="checkbox"
         id="tasks"
         checked={task.isChecked}
-        onChange={(e) =>
-          onEdit({
-            ...task,
-            isChecked: e.target.checked,
-          })
-        }
+        onChange={(e) => {
+          dispatch({
+            type: "edited",
+            task: {
+              ...task,
+              isChecked: e.target.checked,
+            },
+          });
+        }}
       />
-      <CustomCheckbox/>
+      <CustomCheckbox />
       {listItem}
-      <SecondaryButton onClick={() => onDelete(task.id)}>-</SecondaryButton>
+      <EditButton
+        onClick={() => {
+          dispatch({
+            type: "deleted",
+            id: task.id,
+          });
+        }}
+        style={{ fontWeight: "600" }}
+      >
+        &#10005;
+      </EditButton>
     </CheckboxLabel>
-  );
-}
-
-export default function TaskList({ tasks, onEditTask, onDeleteTask }) {
-  return (
-    <ItemContainer>
-      <ItemList style={{ listStyle: "none" }}>
-        {" "}
-        {/*list type none*/}
-        {tasks.map((task) => (
-          <ListItem key={task.id}>
-            <Task task={task} onEdit={onEditTask} onDelete={onDeleteTask} />
-          </ListItem>
-        ))}
-      </ItemList>
-    </ItemContainer>
   );
 }

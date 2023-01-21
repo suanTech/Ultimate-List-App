@@ -1,77 +1,56 @@
-import React, { useReducer } from "react";
-import TaskList from './TaskList';
-import AddTodo from './AddTodo'
-import { PlainText } from "../styles/Text.styled";
+import { useReducer, useEffect } from "react";
+import { TasksContext, TasksDispatchContext } from "../TasksContext";
+import TaskList from "./TaskList";
+import AddTodo from "./AddTodo";
 
-
-let nextId = 0;
 let initialTasks = [];
+const initializer = (initialValue = initialTasks) => 
+  JSON.parse(localStorage.getItem("tasks")) || initialValue;
 function TodoApp() {
-  const [tasks, dispatch] = useReducer(
-    tasksReducer,
-    initialTasks
-  );
+  const [tasks, dispatch] = useReducer(tasksReducer, [], initializer);
+  useEffect(() => {
+    localStorage.setItem("tasks",JSON.stringify(tasks))
+  }, [tasks]);
+
   function tasksReducer(tasks, action) {
-    switch(action.type) {
-      case 'added': {
-        return [...tasks, {
-          id: action.id,
-          task: action.task,
-          isChecked: false
-        }]
+    switch (action.type) {
+      case "added": {
+        return [
+          ...tasks,
+          {
+            id: action.id,
+            text: action.text,
+            isChecked: false,
+          },
+        ];
       }
-      case 'edited': {
-        return tasks.map(task => {
-          if(task.id === action.task.id) {
+      case "edited": {
+        return tasks.map((task) => {
+          if (task.id === action.task.id) {
             return action.task;
           } else {
             return task;
           }
-        })
+        });
       }
-      case 'deleted': {
-        return tasks.filter(task => task.id !== action.id)
+      case "deleted": {
+        return tasks.filter((task) => task.id !== action.id);
       }
-      default : {
-        throw Error('unknown action: ' + action.type);
+      default: {
+        throw Error("unknown action: " + action.type);
       }
     }
   }
-  function handleAddTask(task) {
-    dispatch( {
-      type: 'added',
-      id: nextId++,
-      task: task,
-    } )
-  }
-  function handleEditTask(task) {
-    dispatch({
-      type: 'edited',
-      task: task
-    })
-  }
-  function handleDeletedTask(taskId) {
-    dispatch({
-      type: 'deleted',
-      id: taskId
-    })
-  }
-  const now = new Date();
-  const today = now.toDateString().split(' ').slice(0,3).join(' ')
   return (
     <>
-      <PlainText>{today}</PlainText>
-       <AddTodo 
-        onAddTask={handleAddTask}
-       />
-       <TaskList 
-        tasks={tasks}
-        onEditTask={handleEditTask}
-        onDeleteTask={handleDeletedTask}
-       />
+      <TasksContext.Provider value={tasks}>
+        <TasksDispatchContext.Provider value={dispatch}>
+          <AddTodo />
+          <TaskList />
+        </TasksDispatchContext.Provider>
+      </TasksContext.Provider>
     </>
-  )
+  );
 }
 
-
-export default TodoApp
+export default TodoApp;

@@ -1,28 +1,37 @@
-import React, { useState } from 'react'
-import { PrimaryButton } from '../styles/Buttons.styled';
-import { AddItemInput } from '../styles/Inputs.styled';
+import React, { useState, useContext } from "react";
+import { AddButton } from "../styles/Buttons.styled";
+import { AddItemForm, AddItemInput } from "../styles/Inputs.styled";
+import { TasksDispatchContext } from "../TasksContext";
 
-export default function AddTodo({onAddTask}) {
-  const [task, setTask] = useState('');
-
+let nextId = 0;
+export default function AddTodo() {
+  const [task, setTask] = useState("");
+  const dispatch = useContext(TasksDispatchContext);
+  function handleSubmit(e) {
+    e.preventDefault();
+    if (task === "") {
+      alert("Please enter task");
+    } else {
+      dispatch({
+        type: "added",
+        id: nextId++,
+        text: task,
+      });
+      setTask("");
+    }
+  };
   return (
-    <>
-      <AddItemInput 
-        placeholder='add task'
-        onChange={e => {
-          setTask(e.target.value)}
-        }
+    <AddItemForm>
+      <AddItemInput
+        placeholder="add task"
+        onChange={(e) => {
+          setTask(e.target.value);
+        }}
         value={task}
       />
-      <PrimaryButton onClick={() => {
-          if(task === '') {
-            alert('Please enter task')
-          }
-          else {
-            setTask('')
-            onAddTask(task)}
-      }}>
-        + </PrimaryButton>
-    </>
-  )
+      <AddButton type="submit" onClick={handleSubmit}>
+        +{" "}
+      </AddButton>
+    </AddItemForm>
+  );
 }
