@@ -4,15 +4,12 @@ import Shopping from "./ShoppingList/Shopping";
 import { ListsContainer } from "./styles/Containers.styled";
 import { PrimaryButton } from "./styles/Buttons.styled";
 
-let initialName = '';
 export default function ListContainer({ isTodo, isShopping }) {
   function displayList() {
     if (isTodo) {
-      initialName = 'Todo List'
       return <TodoApp />;
     }
     if (isShopping) {
-      initialName = 'Shopping List'
       return <Shopping />;
     }
   }
@@ -30,7 +27,7 @@ export default function ListContainer({ isTodo, isShopping }) {
   return (
     <>
       <ListsContainer>
-        <Header initialName={initialName}/>
+        <Header initialName={isTodo ? 'Todo List' : 'Shopping List'}/>
         <p>{today}</p>
         {displayList()}
         <PrimaryButton
