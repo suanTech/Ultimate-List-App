@@ -6,7 +6,11 @@ import { ListsContainer } from "./styles/Containers.styled";
 import { PrimaryButton } from "./styles/Buttons.styled";
 
 export default function ListContainer({initialName, isTodo, isShopping}) {
-  const [listName, setListName] = useState(initialName);
+  const [listName, setListName] = useState((initialName) => {
+    const savedName = localStorage.getItem('list-name');
+    const newName = JSON.parse(savedName);
+    return newName || initialName;
+  });
   function handleListNameChange(e) {
     setListName(e.target.value);
   }
