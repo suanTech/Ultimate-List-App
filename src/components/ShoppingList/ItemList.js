@@ -17,7 +17,7 @@ export default function ItemList() {
         {items
           .filter((item) => !item.isChecked)
           .map((item, index) => (
-            <ListItem key={item.id} index={index}>
+            <ListItem key={item.id} index={index} disabled={false}>
               <Item item={item} />
             </ListItem>
           ))}
@@ -57,7 +57,7 @@ function Item({ item, disabled }) {
       <CustomCheckbox />
       <ItemText>{item.name}</ItemText>
       <QuantityButton
-        onClick={(e) => {
+        onClick={() => {
           dispatch({
             type: "decreased",
             id: item.id,
