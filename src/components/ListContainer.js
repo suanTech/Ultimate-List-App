@@ -4,13 +4,8 @@ import TodoApp from "./TodoList/TodoApp";
 import Shopping from "./ShoppingList/Shopping";
 import { ListsContainer } from "./styles/Containers.styled";
 import { PrimaryButton } from "./styles/Buttons.styled";
-import { ListNameContext } from "./Context";
 
 export default function ListContainer({ isTodo, isShopping }) {
-  const listName = useState(ListNameContext);
-  useEffect(() => {
-    localStorage.setItem("list-name", JSON.stringify(listName));
-  }, [listName]);
   function displayList() {
     if (isTodo) {
       return <TodoApp />;
