@@ -1,5 +1,5 @@
 import React, { useReducer, useEffect } from "react";
-import { TasksContext, TasksDispatchContext } from "../TasksContext";
+import { TasksContext, TasksDispatchContext } from "../Context";
 import AddItem from "./AddItem";
 import ItemList from "./ItemList";
 

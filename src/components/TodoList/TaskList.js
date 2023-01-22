@@ -1,5 +1,5 @@
 import { useState, useContext } from "react";
-import { TasksContext, TasksDispatchContext } from "../TasksContext";
+import { TasksContext, TasksDispatchContext } from "../Context";
 
 import { EditButton } from "../styles/Buttons.styled";
 import { ItemContainer, ItemListContainer } from "../styles/Containers.styled";

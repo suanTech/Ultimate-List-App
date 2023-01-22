@@ -1,7 +1,7 @@
 import { useState, useContext } from "react";
 import { AddButton } from "../styles/Buttons.styled";
 import { AddItemForm, AddItemInput } from "../styles/Inputs.styled";
-import { TasksDispatchContext } from "../TasksContext";
+import { TasksDispatchContext } from "../Context";
 
 let nextId = 0;
 export default function AddItem() {

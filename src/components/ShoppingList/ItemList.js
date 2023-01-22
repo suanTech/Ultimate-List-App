@@ -6,7 +6,7 @@ import {
   CustomCheckbox,
   ListItem,
 } from "../styles/Inputs.styled";
-import { TasksContext, TasksDispatchContext } from "../TasksContext";
+import { TasksContext, TasksDispatchContext } from "../Context";
 import { ItemContainer, ItemListContainer } from "../styles/Containers.styled";
 import { ItemText, PlainText } from "../styles/Text.styled";
 export default function ItemList() {

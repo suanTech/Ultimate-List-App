@@ -1,8 +1,13 @@
-import React, {useState} from 'react'
+import { useState } from 'react'
 import { PrimaryButton } from './styles/Buttons.styled';
 import { EditInput } from './styles/Header.styled';
 import { ListName } from './styles/Text.styled';
-export default function Header({listName, onChange}) {
+export default function Header({initialName}) {
+  const [listName, setListName] = useState(() => {
+    const savedName = localStorage.getItem("list-name");
+    const newName = JSON.parse(savedName);
+    return newName ? newName : initialName;
+  });
   const [isEditing, setIsEditing] = useState(false);
 
   return (
@@ -12,7 +17,7 @@ export default function Header({listName, onChange}) {
         <EditInput 
           type='text' 
           value={listName}
-          onChange={onChange}
+          onChange={(e)=> setListName(e.target.value)}
           style={{width: `${listName.length}ch`}}
         />
         <PrimaryButton
