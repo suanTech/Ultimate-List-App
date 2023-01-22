@@ -20,7 +20,7 @@ export default function Shopping() {
           {
             id: action.id,
             name: action.name,
-            quantity: initialQuantity,
+            quantity: initialQuantity.current,
             isChecked: false,
           },
         ];
