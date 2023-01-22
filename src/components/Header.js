@@ -3,6 +3,7 @@ import { ListNameContext } from './Context';
 import { PrimaryButton } from './styles/Buttons.styled';
 import { EditInput } from './styles/Header.styled';
 import { ListName } from './styles/Text.styled';
+
 export default function Header({initialName}) {
   const [listName, setListName] = useState(() => {
     const savedName = localStorage.getItem("list-name");
