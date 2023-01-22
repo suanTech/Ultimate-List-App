@@ -63,7 +63,7 @@ function Item({ item, disabled }) {
             id: item.id,
           });
         }}
-        // disabled={disabled}
+        disabled={disabled}
       >
         -
       </QuantityButton>
@@ -75,7 +75,7 @@ function Item({ item, disabled }) {
             id: item.id,
           });
         }}
-        // disabled={disabled}
+        disabled={disabled}
       >
         +
       </QuantityButton>

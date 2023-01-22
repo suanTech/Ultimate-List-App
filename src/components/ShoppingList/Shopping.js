@@ -4,10 +4,10 @@ import AddItem from "./AddItem";
 import ItemList from "./ItemList";
 
 let initialItems = [];
-const initializer = (initialValue = initialItems) => 
-  JSON.parse(localStorage.getItem("items")) || initialValue;
+// const initializer = (initialValue = initialItems) => 
+//   JSON.parse(localStorage.getItem("items")) || initialValue;
 export default function Shopping() {
-  const [items, dispatch] = useReducer(reducer, [], initializer);
+  const [items, dispatch] = useReducer(reducer, initialItems);
   useEffect(() => {
     localStorage.setItem("items",JSON.stringify(items))
   }, [items]);
