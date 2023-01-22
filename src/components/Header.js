@@ -4,17 +4,18 @@ import { EditInput } from "./styles/Header.styled";
 import { ListName } from "./styles/Text.styled";
 
 export default function Header({ initialName }) {
-  const [listName, setListName] = useState(initialName);
+  const getStorageData = (keyName, defaultValue) => {
+    const savedItem = localStorage.getItem(keyName);
+    const parsedItem = JSON.parse(savedItem);
+    return parsedItem || defaultValue;
+  };
+  const [listName, setListName] = useState(()=> {
+    return getStorageData('list-name', initialName)
+  });
   const [isEditing, setIsEditing] = useState(false);
   useEffect(() => {
     localStorage.setItem("list-name", JSON.stringify(listName));
   }, [listName]);
-  useEffect(() => {
-    const savedName = JSON.parse(localStorage.getItem('list-name'))
-    if(savedName) {
-      setListName(savedName)
-    } 
-  }, [initialName])
   return (
     <>
       {isEditing ? (
