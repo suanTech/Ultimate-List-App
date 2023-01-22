@@ -7,7 +7,7 @@ import { PrimaryButton } from "./styles/Buttons.styled";
 import { ListNameContext } from "./Context";
 
 export default function ListContainer({ isTodo, isShopping }) {
-  const listName = useState(ListNameContext)
+  const listName = useState(ListNameContext);
   useEffect(() => {
     localStorage.setItem("list-name", JSON.stringify(listName));
   }, [listName]);
@@ -32,22 +32,20 @@ export default function ListContainer({ isTodo, isShopping }) {
   const today = now.toDateString().split(" ").slice(0, 3).join(" ");
   return (
     <>
-      <ListNameContext.Provider value={listName}>
-        <ListsContainer>
-          <Header />
-          <p>{today}</p>
-          {displayList()}
-          <PrimaryButton
-            onClick={handleClickSaveBtn}
-            style={{ marginRight: "15px" }}
-          >
-            Save List
-          </PrimaryButton>
-          <PrimaryButton onClick={handleClickDeleteBtn}>
-            Delete list
-          </PrimaryButton>
-        </ListsContainer>
-      </ListNameContext.Provider>
+      <ListsContainer>
+        <Header />
+        <p>{today}</p>
+        {displayList()}
+        <PrimaryButton
+          onClick={handleClickSaveBtn}
+          style={{ marginRight: "15px" }}
+        >
+          Save List
+        </PrimaryButton>
+        <PrimaryButton onClick={handleClickDeleteBtn}>
+          Delete list
+        </PrimaryButton>
+      </ListsContainer>
     </>
   );
 }

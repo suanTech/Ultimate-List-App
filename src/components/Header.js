@@ -1,4 +1,5 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import { ListNameContext } from './Context';
 import { PrimaryButton } from './styles/Buttons.styled';
 import { EditInput } from './styles/Header.styled';
 import { ListName } from './styles/Text.styled';
@@ -9,9 +10,11 @@ export default function Header({initialName}) {
     return newName ? newName : initialName;
   });
   const [isEditing, setIsEditing] = useState(false);
-
+  useEffect(() => {
+    localStorage.setItem("list-name", JSON.stringify(listName));
+  }, [listName]);
   return (
-    <>
+    <ListNameContext.Provider value={listName}>
     {isEditing ? 
       <>
         <EditInput 
@@ -34,6 +37,6 @@ export default function Header({initialName}) {
       }
       {/* when button clicks(edit mode) => */}
       {/* <input type='text' value="Todo List"/> */}
-    </>
+    </ListNameContext.Provider>
   )
 }
