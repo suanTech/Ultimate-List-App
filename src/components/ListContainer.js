@@ -5,7 +5,6 @@ import { ListsContainer } from "./styles/Containers.styled";
 import { PrimaryButton } from "./styles/Buttons.styled";
 
 let initialName = '';
-
 export default function ListContainer({ isTodo, isShopping }) {
   function displayList() {
     if (isTodo) {

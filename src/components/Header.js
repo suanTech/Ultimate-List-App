@@ -14,7 +14,7 @@ export default function Header({ initialName }) {
     if(savedName) {
       setListName(savedName)
     } 
-  },[])
+  }, [initialName])
   return (
     <>
       {isEditing ? (
