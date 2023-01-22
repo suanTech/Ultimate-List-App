@@ -10,26 +10,26 @@ import { TasksContext, TasksDispatchContext } from "../TasksContext";
 import { ItemContainer, ItemListContainer } from "../styles/Containers.styled";
 import { ItemText, PlainText } from "../styles/Text.styled";
 export default function ItemList() {
-  const items = useContext(TasksContext);
+  const tasks = useContext(TasksContext);
   return (
     <ItemContainer>
       <ItemListContainer>
-        {items
-          .filter((item) => !item.isChecked)
-          .map((item, index) => (
-            <ListItem key={item.id} index={index}>
-              <Item item={item} disabled={false} />
+        {tasks
+          .filter((task) => !task.isChecked)
+          .map((task, index) => (
+            <ListItem key={task.id} index={index}>
+              <Item task={task} />
             </ListItem>
           ))}
-        {items
-          .filter((item) => item.isChecked)
-          .map((item, index) => (
+        {tasks
+          .filter((task) => task.isChecked)
+          .map((task, index) => (
             <ListItem
-              key={item.id}
+              key={task.id}
               index={index}
               style={{ background: "#F7F6F4" }}
             >
-              <Item item={item} disabled={true}/>
+              <Item task={task} disabled={true}/>
             </ListItem>
           ))}
       </ItemListContainer>
@@ -37,42 +37,42 @@ export default function ItemList() {
   );
 }
 
-function Item({ item, disabled }) {
+function Item({ task, disabled }) {
   const dispatch = useContext(TasksDispatchContext);
   return (
     <CheckboxLabel>
       <CheckboxInput
         type="checkbox"
-        checked={item.isChecked}
+        checked={task.isChecked}
         onChange={(e) => {
           dispatch({
             type: "completed",
             name: {
-              ...item,
+              ...task,
               isChecked: e.target.checked,
             },
           });
         }}
       />
       <CustomCheckbox />
-      <ItemText>{item.name}</ItemText>
+      <ItemText>{task.name}</ItemText>
       <QuantityButton
-        onClick={() => {
+        onClick={(e) => {
           dispatch({
             type: "decreased",
-            id: item.id,
+            id: task.id,
           });
         }}
         disabled={disabled}
       >
         -
       </QuantityButton>
-      <PlainText>{item.quantity}</PlainText>
+      <PlainText>{task.quantity}</PlainText>
       <QuantityButton
         onClick={() => {
           dispatch({
             type: "increased",
-            id: item.id,
+            id: task.id,
           });
         }}
         disabled={disabled}
