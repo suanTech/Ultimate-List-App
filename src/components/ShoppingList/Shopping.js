@@ -4,7 +4,6 @@ import AddItem from "./AddItem";
 import ItemList from "./ItemList";
 
 let initialItems = [];
-let initialQuantity = 1;
 const initializer = (initialValue = initialItems) => 
   JSON.parse(localStorage.getItem("items")) || initialValue;
 export default function Shopping() {
@@ -20,7 +19,7 @@ export default function Shopping() {
           {
             id: action.id,
             name: action.name,
-            quantity: initialQuantity,
+            quantity: 1,
             isChecked: false,
           },
         ];
