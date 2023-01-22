@@ -20,12 +20,12 @@ function App() {
           <Route path="/" element={<Landing />} />
           <Route
             path="todo"
-            element={<ListContainer initialName={"Todo List"} isTodo={true} />}
+            element={<ListContainer isTodo={true} />}
           />
           <Route
             path="shopping"
             element={
-              <ListContainer initialName={"Shopping List"} isShopping={true} />
+              <ListContainer isShopping={true} />
             }
           />
           <Route path="*" element={<NotFound/>} style={{backgroundColor: '#FAD470'}}></Route>
