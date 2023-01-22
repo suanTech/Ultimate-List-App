@@ -10,10 +10,10 @@ export default function Header({ initialName }) {
     localStorage.setItem("list-name", JSON.stringify(listName));
   }, [listName]);
   useEffect(() => {
-    const listName = JSON.parse(localStorage.getItem('list-name'))
-    if(listName) {
-      setListName(listName)
-    }
+    const savedName = JSON.parse(localStorage.getItem('list-name'))
+    if(savedName) {
+      setListName(savedName)
+    } 
   },[])
   return (
     <>
