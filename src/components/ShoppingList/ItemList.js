@@ -17,8 +17,8 @@ export default function ItemList() {
         {items
           .filter((item) => !item.isChecked)
           .map((item, index) => (
-            <ListItem key={item.id} index={index} disabled={false}>
-              <Item item={item} />
+            <ListItem key={item.id} index={index}>
+              <Item item={item} disabled={false} />
             </ListItem>
           ))}
         {items
