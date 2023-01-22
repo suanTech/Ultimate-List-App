@@ -61,7 +61,7 @@ function Task({ task, disabled }) {
               type: "edited",
               task: {
                 ...task,
-                task: e.target.value,
+                text: e.target.value,
               },
             });
           }}

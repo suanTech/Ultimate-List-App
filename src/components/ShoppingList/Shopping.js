@@ -3,19 +3,19 @@ import { TasksContext, TasksDispatchContext } from "../TasksContext";
 import AddItem from "./AddItem";
 import ItemList from "./ItemList";
 
-let initialTasks = [];
-const initializer = (initialValue = initialTasks) => 
-  JSON.parse(localStorage.getItem("tasks")) || initialValue;
+let initialItems = [];
+const initializer = (initialValue = initialItems) => 
+  JSON.parse(localStorage.getItem("items")) || initialValue;
 export default function Shopping() {
-  const [tasks, dispatch] = useReducer(reducer, [], initializer);
+  const [items, dispatch] = useReducer(reducer, [], initializer);
   useEffect(() => {
-    localStorage.setItem("tasks",JSON.stringify(tasks))
-  }, [tasks]);
-  function reducer(tasks, action) {
+    localStorage.setItem("items",JSON.stringify(items))
+  }, [items]);
+  function reducer(items, action) {
     switch (action.type) {
       case "added": {
         return [
-          ...tasks,
+          ...items,
           {
             id: action.id,
             name: action.name,
@@ -25,7 +25,7 @@ export default function Shopping() {
         ];
       }
       case "completed": {
-        return tasks.map((item) => {
+        return items.map((item) => {
           if (item.id === action.name.id) {
             return action.name;
           } else {
@@ -34,10 +34,10 @@ export default function Shopping() {
         });
       }
       case "deleted": {
-        return tasks.filter((item) => item.id !== action.id);
+        return items.filter((item) => item.id !== action.id);
       }
       case "increased": {
-        return tasks.map((item) => {
+        return items.map((item) => {
           if (item.id === action.id) {
             return {
               ...item,
@@ -47,7 +47,7 @@ export default function Shopping() {
         });
       }
       case "decreased": {
-        return tasks
+        return items
           .filter((item) => item.quantity >= 0)
           .map((item) => {
             if (item.id === action.id) {
@@ -65,7 +65,7 @@ export default function Shopping() {
   }
   return (
     <>
-      <TasksContext.Provider value={tasks}>
+      <TasksContext.Provider value={items}>
         <TasksDispatchContext.Provider value={dispatch}>
           {/* add item goes here */}
           <AddItem />
