@@ -1,4 +1,4 @@
-import React, { useReducer, useEffect, useRef } from "react";
+import React, { useReducer, useEffect } from "react";
 import { TasksContext, TasksDispatchContext } from "../TasksContext";
 import AddItem from "./AddItem";
 import ItemList from "./ItemList";
@@ -8,7 +8,6 @@ const initializer = (initialValue = initialItems) =>
   JSON.parse(localStorage.getItem("items")) || initialValue;
 export default function Shopping() {
   const [items, dispatch] = useReducer(reducer, [], initializer);
-  const initialQuantity = useRef(1)
   useEffect(() => {
     localStorage.setItem("items",JSON.stringify(items))
   }, [items]);
@@ -20,7 +19,7 @@ export default function Shopping() {
           {
             id: action.id,
             name: action.name,
-            quantity: initialQuantity.current,
+            quantity: 1,
             isChecked: false,
           },
         ];
@@ -42,7 +41,7 @@ export default function Shopping() {
           if (item.id === action.id) {
             return {
               ...item,
-              quantity: item.quantity++,
+              quantity: item.quantity + 1,
             };
           } else return item;
         });
@@ -54,7 +53,7 @@ export default function Shopping() {
             if (item.id === action.id) {
               return {
                 ...item,
-                quantity: item.quantity--,
+                quantity: item.quantity - 1,
               };
             } else return item;
           });
