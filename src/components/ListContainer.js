@@ -9,7 +9,7 @@ export default function ListContainer({initialName, isTodo, isShopping}) {
   const [listName, setListName] = useState((initialName) => {
     const savedName = localStorage.getItem('list-name');
     const newName = JSON.parse(savedName);
-    return newName || initialName;
+    return newName ? newName : initialName;
   });
   function handleListNameChange(e) {
     setListName(e.target.value);
