@@ -27,7 +27,7 @@ export default function ListContainer({ isTodo, isShopping }) {
   return (
     <>
       <ListsContainer>
-        <Header initialName={isTodo ? 'Todo List' : 'Shopping List'}/>
+        <Header initialName={isTodo ? "Todo List" : "Shopping List"} />
         <p>{today}</p>
         {displayList()}
         <PrimaryButton

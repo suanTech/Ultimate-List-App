@@ -48,7 +48,7 @@ export default function Shopping() {
       }
       case "decreased": {
         return items
-          .filter((item) => item.quantity >= 0)
+          .filter((item) => item.quantity > 0)
           .map((item) => {
             if (item.id === action.id) {
               return {
