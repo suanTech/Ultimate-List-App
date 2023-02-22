@@ -22,6 +22,8 @@ This is a simple front-end todo list/shopping list app built using React and Sty
 - React 
 - Styled Components
 
+## Strugglings and Handlings
+- Documented via Notion [here](https://gray-push-d44.notion.site/React-dictionary-app-9ad1cb892f0647d7b8b8e295cd582587)
 ## Takeaways
 ### 👍 : 
  - got comfortable with react router and styled components
