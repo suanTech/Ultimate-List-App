@@ -18,7 +18,6 @@ export default function TaskList() {
     return (
       <ItemContainer>
         <ItemListContainer style={{ listStyle: "none" }}>
-          {/*list type none*/}
           {tasks
             .filter((task) => !task.isChecked)
             .map((task, index) => (
@@ -96,6 +95,7 @@ function Task({ task, disabled }) {
               isChecked: e.target.checked,
             },
           });
+          console.log("changed!")
         }}
       />
       <CustomCheckbox />

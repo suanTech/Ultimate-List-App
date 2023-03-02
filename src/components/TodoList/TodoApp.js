@@ -15,6 +15,7 @@ function TodoApp() {
   function tasksReducer(tasks, action) {
     switch (action.type) {
       case "added": {
+        console.log("Added!")
         return [
           ...tasks,
           {
@@ -25,6 +26,7 @@ function TodoApp() {
         ];
       }
       case "edited": {
+        console.log("Edited!")
         return tasks.map((task) => {
           if (task.id === action.task.id) {
             return action.task;
@@ -34,6 +36,7 @@ function TodoApp() {
         });
       }
       case "deleted": {
+        console.log("Deleted!")
         return tasks.filter((task) => task.id !== action.id);
       }
       default: {

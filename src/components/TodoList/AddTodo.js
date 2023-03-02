@@ -2,8 +2,8 @@ import React, { useState, useContext } from "react";
 import { AddButton } from "../styles/Buttons.styled";
 import { AddItemForm, AddItemInput } from "../styles/Inputs.styled";
 import { TasksDispatchContext } from "../Context";
+import {v4 as uniqueID} from 'uuid';
 
-let nextId = 0;
 export default function AddTodo() {
   const [task, setTask] = useState("");
   const dispatch = useContext(TasksDispatchContext);
@@ -14,7 +14,7 @@ export default function AddTodo() {
     } else {
       dispatch({
         type: "added",
-        id: nextId++,
+        id: uniqueID(),
         text: task,
       });
       setTask("");
