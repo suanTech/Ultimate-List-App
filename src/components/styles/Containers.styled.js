@@ -29,6 +29,7 @@ const ListsContainer = styled.div`
   border-bottom: 2px solid black;
   overflow: hidden;
   animation: ${rollDown} 0.9s ease-in;
+  transition: width .3s linear;
   @media (min-width: 768px) {
     width: 500px;
   }
