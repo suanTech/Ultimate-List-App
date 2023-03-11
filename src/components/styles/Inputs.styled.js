@@ -35,7 +35,7 @@ const EditItemInput = styled.input`
   background: transparent;
 `
 
-const ListItem = styled.li`
+const ItemWrapper = styled.li`
   border-bottom: 1.2px solid ${props => props.theme.colors.lightGrey};
   min-width: 200px;
   padding: 10px;
@@ -73,4 +73,4 @@ const CheckboxLabel = styled.label`
   align-items: center;
 `
 
-export { AddItemForm, AddItemInput, EditItemInput, ListItem, CheckboxInput, CustomCheckbox, CheckboxLabel}
+export { AddItemForm, AddItemInput, EditItemInput, ItemWrapper, CheckboxInput, CustomCheckbox, CheckboxLabel}

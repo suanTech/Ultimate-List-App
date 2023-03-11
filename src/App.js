@@ -11,24 +11,23 @@ import { ThemeProvider } from "styled-components";
 import { Colors } from "./components/styles/Colors";
 function App() {
   const theme = {
-    colors: Colors
+    colors: Colors,
   };
   return (
     <ThemeProvider theme={theme}>
       <AppContainer>
         <Routes>
           <Route path="/" element={<Landing />} />
-          <Route
-            path="todo"
-            element={<ListContainer isTodo={true} />}
-          />
+          <Route path="todo" element={<ListContainer isTodo={true} />} />
           <Route
             path="shopping"
-            element={
-              <ListContainer isShopping={true} />
-            }
+            element={<ListContainer isShopping={true} />}
           />
-          <Route path="*" element={<NotFound/>} style={{backgroundColor: '#FAD470'}}></Route>
+          <Route
+            path="*"
+            element={<NotFound />}
+            style={{ backgroundColor: "#FAD470" }}
+          ></Route>
         </Routes>
       </AppContainer>
     </ThemeProvider>

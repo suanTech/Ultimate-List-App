@@ -1,5 +1,5 @@
 import Header from "./Header";
-import TodoApp from "./TodoList/TodoApp";
+import Todo from "./TodoList/Todo";
 import Shopping from "./ShoppingList/Shopping";
 import { ListsContainer } from "./styles/Containers.styled";
 import { PrimaryButton } from "./styles/Buttons.styled";
@@ -7,7 +7,7 @@ import { PrimaryButton } from "./styles/Buttons.styled";
 export default function ListContainer({ isTodo, isShopping }) {
   function displayList() {
     if (isTodo) {
-      return <TodoApp />;
+      return <Todo />;
     }
     if (isShopping) {
       return <Shopping />;

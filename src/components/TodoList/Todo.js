@@ -6,7 +6,7 @@ import AddTodo from "./AddTodo";
 let initialTasks = [];
 const initializer = (initialValue = initialTasks) => 
   JSON.parse(localStorage.getItem("tasks")) || initialValue;
-function TodoApp() {
+export default function Todo() {
   const [tasks, dispatch] = useReducer(tasksReducer, [], initializer);
   useEffect(() => {
     localStorage.setItem("tasks",JSON.stringify(tasks))
@@ -55,5 +55,3 @@ function TodoApp() {
     </>
   );
 }
-
-export default TodoApp;

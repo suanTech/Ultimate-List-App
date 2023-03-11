@@ -5,10 +5,10 @@ import { EditButton } from "../styles/Buttons.styled";
 import { ItemContainer, ItemListContainer } from "../styles/Containers.styled";
 import {
   EditItemInput,
-  ListItem,
   CheckboxInput,
   CustomCheckbox,
   CheckboxLabel,
+  ItemWrapper,
 } from "../styles/Inputs.styled";
 import { ItemText } from "../styles/Text.styled";
 
@@ -21,20 +21,20 @@ export default function TaskList() {
           {tasks
             .filter((task) => !task.isChecked)
             .map((task, index) => (
-              <ListItem key={task.id} index={index}>
+              <ItemWrapper key={task.id} index={index}>
                 <Task task={task} />
-              </ListItem>
+              </ItemWrapper>
             ))}
           {tasks
             .filter((task) => task.isChecked)
             .map((task, index) => (
-              <ListItem
+              <ItemWrapper
                 key={task.id}
                 index={index}
                 style={{ background: "#F7F6F4" }}
               >
                 <Task task={task} disabled={true} />
-              </ListItem>
+              </ItemWrapper>
             ))}
         </ItemListContainer>
       </ItemContainer>

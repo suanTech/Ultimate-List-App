@@ -5,7 +5,7 @@ const rollDown = keyframes`
     height: 0;
   }
   100%{
-    height: 520px;
+    height: 600px;
   }
 `;
 
@@ -13,32 +13,32 @@ const AppContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 300px;
-  height: 100%;
+  justify-content: center;
+  width: 100%;
   margin: auto;
-  margin-top: 8vh;
+  padding-top: calc((100vh - 600px) / 2);
   text-align: center;
-  @media (min-width: 768px) {
-    width: 500px;
-  }
 `;
 
 const ListsContainer = styled.div`
-  width: 100%;
-  height: 520px;
+  width: 320px;
+  height: 600px;
   padding-bottom: 20px;
   box-shadow: 0 1px 18px 4px ${props => props.theme.colors.lighterGrey};
   border-top: 2px solid black;
   border-bottom: 2px solid black;
   overflow: hidden;
   animation: ${rollDown} 0.9s ease-in;
+  @media (min-width: 768px) {
+    width: 500px;
+  }
 `;
 
 const ItemContainer = styled.div`
   overflow: scroll;
   width: 85%;
   max-width: 400px;
-  height: 270px;
+  height: 350px;
   margin: 15px auto;
   text-align: left;
 `;

@@ -4,7 +4,7 @@ import {
   CheckboxInput,
   CheckboxLabel,
   CustomCheckbox,
-  ListItem,
+  ItemWrapper,
 } from "../styles/Inputs.styled";
 import { TasksContext, TasksDispatchContext } from "../Context";
 import { ItemContainer, ItemListContainer } from "../styles/Containers.styled";
@@ -17,20 +17,20 @@ export default function ItemList() {
         {items
           .filter((item) => !item.isChecked)
           .map((item, index) => (
-            <ListItem key={item.id} index={index}>
+            <ItemWrapper key={item.id} index={index}>
               <Item item={item} />
-            </ListItem>
+            </ItemWrapper>
           ))}
         {items
           .filter((item) => item.isChecked)
           .map((item, index) => (
-            <ListItem
+            <ItemWrapper
               key={item.id}
               index={index}
               style={{ background: "#F7F6F4" }}
             >
               <Item item={item} disabled={true}/>
-            </ListItem>
+            </ItemWrapper>
           ))}
       </ItemListContainer>
     </ItemContainer>
