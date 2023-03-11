@@ -9,10 +9,12 @@ body {
   height: 100vh;
 }
 button,
+a,
 input,
 select,
 option {
   font-family: 'Montserrat Alternates', sans-serif;
+  cursor: pointer;
 }
 a,
 a:visited,

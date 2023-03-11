@@ -3,13 +3,13 @@ import styled from "styled-components";
 const SelectList = styled.div`
   display: flex;
   width: 90%;
+  max-width: 500px;
   align-items: center;
   justify-content: space-around;
   margin: auto;
   margin-top: 30px;
 `
 const SelectInput = styled.select`
-  cursor: pointer;
   width: 70%;
   min-width: 200px;
   height: 6.2vh;

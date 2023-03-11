@@ -7,7 +7,6 @@ const scaleUp = keyframes`
 `
 
 const Button = `
-  cursor: pointer;
   padding: 0;
   text-decoration: none;
   border: none;
@@ -34,6 +33,10 @@ const GoButton = styled.button`
   &:hover {
     animation: ${scaleUp} .3s;
     background-color: ${props => props.theme.colors.yellow};
+  }
+  a {
+    display: inline-block;
+    width: 100%;
   }
 `
 
